@@ -14,3 +14,9 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "ordersystem.settings")
 
 application = get_wsgi_application()
+
+# Use whitenoise package for static files on Heroku
+
+from whitenoise.django import DjangoWhiteNoise
+
+application = DjangoWhiteNoise(application)

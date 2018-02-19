@@ -1,0 +1,19 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}">
+    </script>
+  </head>
+  <body>
+    <form method="POST">
+      Restaurant page
+      <a href="{% url 'restaurant-sign-out' %}">Log out</a>
+    </form>
+  </body>
+</html>
