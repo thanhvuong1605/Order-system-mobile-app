@@ -25,7 +25,7 @@ SECRET_KEY = 't-ba39-!nwffpj(n)#l7#d-w1=1bjp8k7r-x-z66lo-@n8a=n1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['limitless-tundra-20163.herokuapp.com',]
+ALLOWED_HOSTS = ['limitless-tundra-20163.herokuapp.com','127.0.0.1','localhost']
 
 
 # Application definition
@@ -38,6 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'order_system_app',
+    'oauth2_provider',
+    'social_django',
+    'rest_framework_social_oauth2',
+    'bootstrap3',
+
 ]
 
 MIDDLEWARE = [
@@ -64,6 +69,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -131,3 +138,42 @@ MEDIA_URL = '/media/'
 import dj_database_url
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+        'rest_framework_social_oauth2.authentication.SocialAuthentication',
+    ),
+}
+
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.facebook.FacebookOAuth2',
+   'rest_framework_social_oauth2.backends.DjangoOAuth2',
+   'django.contrib.auth.backends.ModelBackend',
+
+)
+
+# Facebook configuration
+SOCIAL_AUTH_FACEBOOK_KEY = '371663236635006'
+SOCIAL_AUTH_FACEBOOK_SECRET = '7f4fec93882c32c0d8b29d1b5aae4450'
+
+# Define SOCIAL_AUTH_FACEBOOK_SCOPE to get extra permissions from facebook. Email is not sent by default, to get it, you must request the email permission:
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+    'fields': 'id, name, email'
+}
+
+#the auth pipe is set for different type of user, such as if we have normal customer and VIP customer!
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.user.create_user',
+    'order_system_app.social_auth_pipeline.create_user_by_type',  # <--- set the path to the function
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+)

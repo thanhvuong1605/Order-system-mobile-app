@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Restaurant
+{% endblock %}
+
+{% block sidebar %}
+
+<li><a href="{% url 'restaurant-account' %}">Account</a></li>
+<li><a href="{% url 'restaurant-meals' %}">Meals</a></li>
+<li><a href="{% url 'restaurant-order' %}">Order</a></li>
+<li><a href="{% url 'restaurant-report' %}">Report</a></li>
+
+{% endblock %}
