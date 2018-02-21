@@ -1,4 +1,4 @@
-Django version 1.10.8
+Django==1.10.8
 Pillow==5.0.0
 gunicorn==19.6.0
 whitenoise==3.2.1
