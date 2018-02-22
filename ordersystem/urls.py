@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from django.contrib import admin
-from order_system_app import views
+from order_system_app import views,apis
 from django.contrib.auth import views as auth_views
 from django.conf.urls.static import static
 from django.conf import settings
@@ -41,12 +41,17 @@ urlpatterns = [
     url(r'^restaurant/order/$', views.restaurant_order,name='restaurant-order'),
     url(r'^restaurant/report/$', views.restaurant_report,name='restaurant-report'),
 
-
-
     #sign in sign out sign up blah blah with rest api
     url(r'^auth_fb/', include('rest_framework_social_oauth2.urls')),
     #/convert-token (sign in/sign up)
     #/revoke-token(sign-out)
+
+
+    #api urls
+    url(r'^api/customer/restaurants/$',apis.customer_get_restaurants),
+
+
+
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
 #for uploading the images need to use static

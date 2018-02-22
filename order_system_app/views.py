@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from order_system_app.forms import UserForm, RestaurantForm, UserFormEdit,MealsForm
 from django.contrib.auth import authenticate,login
 from django.contrib.auth.models import User
-from order_system_app.models import Meals
+from order_system_app.models import Meals,Order,OrderDetails
 # Create your views here.
 
 def home(request):
@@ -14,8 +14,8 @@ def home(request):
 #restaurant part
 @login_required(login_url='/restaurant/sign-in/')
 def restaurant_home(request):
-    return render(request, 'restaurant/order.html',{})
-
+    #return render(request, 'restaurant/order.html',{})
+    return redirect(restaurant_order)
 
 
 
@@ -83,7 +83,15 @@ def restaurant_edit_meals(request,meal_id):
 
 @login_required(login_url='/restaurant/sign-in/')
 def restaurant_order(request):
-    return render(request, 'restaurant/order.html',{})
+    orders = Order.objects.filter(restaurant = request.user.restaurant).order_by("id") #select restaurent of current user
+
+    if request.method == "POST":
+        order = Order.objects.get(id = request.POST["id"],restaurant = request.user.restaurant)
+        if order.status == Order.COOKING:
+            order.status = Order.READY
+            order.save()
+
+    return render(request, 'restaurant/order.html',{"orders":orders})
 
 
 
