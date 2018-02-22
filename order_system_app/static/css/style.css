@@ -12,12 +12,21 @@
 .navbar-nav>li>a {
   line-height: 60px;
 }
+.log-out-btn{
+  border: none;
+}
 
-@media (min-width: 300px) and (max-width: 1000px) {
+@media (max-width: 1000px) {
     .navbar-collapse.collapse {
         display: none !important;
     }
     .brand-custom{
       line-height: 20px !important;
+    }
+    .navbar-toggle{
+      display: block!important;
+    }
+    .navbar-header {
+      float:none!important;
     }
 }

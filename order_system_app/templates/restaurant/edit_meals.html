@@ -1,4 +1,3 @@
-
 {% extends 'restaurant/base.html' %}
 {% load bootstrap3 %}
 {% block page %}
@@ -7,15 +6,13 @@
   <div class="panel">
     <div class="panel-heading">
       <h4 class="panel-title text-center">
-        Account
+        Edit meal
       </h4>
     </div>
     <div class="panel-body">
       <form method="POST" enctype="multipart/form-data"> <!-- for image -->
         {% csrf_token %}
-        {% bootstrap_form user_form %}
-        <h5>Edit restaurant information:</h5>
-        {% bootstrap_form restaurant_form %}
+        {% bootstrap_form meals_form %}
         <button type="submit" name="edit" class="btn btn-warning">Update</button>
       </form>
 

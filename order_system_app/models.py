@@ -27,3 +27,14 @@ class Customer(models.Model):
 
     def __str__(self):
         return self.user.get_full_name()
+
+
+class Meals(models.Model):
+    restaurant = models.ForeignKey(Restaurant)
+    name = models.CharField(max_length=500)
+    description = models.CharField(max_length=500)
+    image = models.ImageField(upload_to = 'meals_images/',blank=False)
+    price = models.IntegerField(default = 0)
+
+    def __str__(self):
+        return self.name

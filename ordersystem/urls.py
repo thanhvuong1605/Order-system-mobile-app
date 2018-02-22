@@ -36,6 +36,8 @@ urlpatterns = [
 
     url(r'^restaurant/account/$', views.restaurant_account,name='restaurant-account'),
     url(r'^restaurant/meals/$', views.restaurant_meals,name='restaurant-meals'),
+    url(r'^restaurant/meals/add$', views.restaurant_add_meals,name='restaurant-add-meals'),
+    url(r'^restaurant/meals/edit/(?P<meal_id>\d+)/$', views.restaurant_edit_meals,name='restaurant-edit-meals'),
     url(r'^restaurant/order/$', views.restaurant_order,name='restaurant-order'),
     url(r'^restaurant/report/$', views.restaurant_report,name='restaurant-report'),
 

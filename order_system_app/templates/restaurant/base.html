@@ -7,8 +7,14 @@
 {% block sidebar %}
 
 <li><a href="{% url 'restaurant-account' %}">Account</a></li>
-<li><a href="{% url 'restaurant-meals' %}">Meals</a></li>
-<li><a href="{% url 'restaurant-order' %}">Order</a></li>
-<li><a href="{% url 'restaurant-report' %}">Report</a></li>
+<li><a href="{% url 'restaurant-meals' %}" >Meals</a></li>
+<li><a href="{% url 'restaurant-order' %}" class="active">Order</a></li>
+<!--<li><a href="{% url 'restaurant-report' %}">Report</a></li>-->
 
+<script>
+    $(document).ready(function() {
+  $('li.active').removeClass('active');
+  $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
+});
+  </script>
 {% endblock %}

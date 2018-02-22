@@ -30,6 +30,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li> <a href="#">Welcome: {{request.user}}&nbsp;&nbsp;<img src="{{MEDIA_URL}}{{request.user.restaurant.logo}}" class="img-thumbnail" width="60" height="60"> </a></li>
+          <li><a href="{% url 'restaurant-sign-out' %}?next={{request.path}}" class="btn log-out-btn">Log out</a> </li>
         </ul>
       </div>
       </div>
@@ -37,12 +38,13 @@
 
     <div class="content container">
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
 
         {% block page %}{% endblock %}
 
         </div>
       </div>
     </div>
-  </body>
+
+</body>
 </html>
