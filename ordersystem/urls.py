@@ -49,9 +49,11 @@ urlpatterns = [
 
     #api urls
     url(r'^api/customer/restaurants/$',apis.customer_get_restaurants),
-
-
-
+    url(r'^api/customer/meals/(?P<restaurant_id>\d+)/$',apis.customer_get_meals), #\d is for number
+    url(r'^api/customer/order/add/$',apis.customer_add_order),
+    url(r'^api/customer/order/latest/$',apis.customer_get_latest_order),
+        #api for order noti
+    # url(r'^api/restaurant/order/noti/(?P<last_request_time>.+)/$', apis.restaurant_order_noti), #. for str
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
 #for uploading the images need to use static

@@ -4,15 +4,40 @@
   Restaurant
 {% endblock %}
 
+
+{% block script %}
+<!--Call back function -->
+  <!-- <script>
+    $(document).ready(function(){
+      var now = new Date();
+      setInterval(function(){
+        $.ajax({
+          url: '/api/restaurant/order/noti/' + now.toISOString() + '/',
+          method: 'GET',
+          sucess: function(data){
+            if(data['noti'] === 0){
+              $('.badge').text('');
+            }else{
+              $('.badge').text(data['noti']);
+               console.log(data['noti']);
+            }
+          }
+        })
+      },3000) //run the query for every 4 second, which is every 4 second the api will be run,
+    })         // pass the string to restaurant noti , and compare to the time when openning the page
+  </script> -->
+{% endblock %}
+
+
 {% block sidebar %}
 
 <li><a href="{% url 'restaurant-account' %}">Account</a></li>
-<li><a href="{% url 'restaurant-meals' %}" >Meals</a></li>
-<li><a href="{% url 'restaurant-order' %}" class="active">Order</a></li>
-<!--<li><a href="{% url 'restaurant-report' %}">Report</a></li>-->
+<li><a href="{% url 'restaurant-meals' %}" class="active">Meals</a></li>
+<li><a href="{% url 'restaurant-order' %}" >Order <span class="badge"></span> </a></li>
+
 
 <script>
-    $(document).ready(function() {
+  $(document).ready(function() {
   $('li.active').removeClass('active');
   $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
 });
